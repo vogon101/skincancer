@@ -1,0 +1,11 @@
+# Jupyter Notebook
+.ipynb_checkpoints
+
+.idea/*
+
+src/__pycache__/
+
+data/
+data_scaled_validation/
+data_scaled/
+data_scaled_original/

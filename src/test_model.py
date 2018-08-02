@@ -1,4 +1,3 @@
-from keras.preprocessing.image import ImageDataGenerator
 from keras.models import load_model
 from moleimages import MoleImages
 from sklearn.metrics import classification_report

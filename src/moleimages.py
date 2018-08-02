@@ -6,6 +6,8 @@ import matplotlib.pyplot as plt
 import glob
 import h5py
 
+import os
+
 
 class MoleImages():
     def __init__(self, dir=None):
@@ -18,6 +20,9 @@ class MoleImages():
         Input: size of the images (128,128)
         Output: Numpy array of (size,num_images)
         '''
+
+        print(os.getcwd())
+
         self.size = size
         X = []
         image_list = glob.glob(self.dir)
