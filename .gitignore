@@ -9,3 +9,5 @@ data/
 data_scaled_validation/
 data_scaled/
 data_scaled_original/
+
+*.pyc

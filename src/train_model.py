@@ -28,9 +28,9 @@ def plot_roc(y_test, y_score, title='ROC Curve'):
 if __name__ == '__main__':
     train_data_dir = 'data_scaled/'
     validation_data_dir = 'data_scaled_validation/'
-    nb_train_samples = 1763
-    nb_validation_samples = 194
-    epochs = 100
+    nb_train_samples = 873
+    nb_validation_samples = 96
+    epochs = 1
     batch_size = 16
 
     #mimg = MoleImages()
@@ -39,26 +39,29 @@ if __name__ == '__main__':
 
     mycnn = CNN()
     train_datagen = ImageDataGenerator(
-    vertical_flip=True,
-    horizontal_flip=True)
+        vertical_flip=True,
+        horizontal_flip=True
+    )
     test_datagen = ImageDataGenerator()
 
     train_generator = train_datagen.flow_from_directory(
         train_data_dir,
         target_size=(128, 128),
         batch_size=batch_size,
-        class_mode='binary')
+        class_mode='binary'
+    )
 
     validation_generator = test_datagen.flow_from_directory(
         validation_data_dir,
         target_size=(128, 128),
         batch_size=batch_size,
-        class_mode='binary')
+        class_mode='binary'
+    )
 
     model = mycnn.fit_generator(train_generator,validation_generator,
         nb_train_samples, nb_validation_samples, epochs, batch_size)
 
-    model.save(sys.argv[1])
+    #model.save(sys.argv[0])
     #y_pred_proba = model.predict(X_test)
     #y_pred = (y_pred_proba >0.5)*1
     #print(classification_report(y_test,y_pred))
