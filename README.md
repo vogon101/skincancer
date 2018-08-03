@@ -41,5 +41,10 @@ To prepare:
 
 The `data_scaled` directory will now contain the scaled data for use in training and `data_scaled_validation` contains images to be used for validation (by default 10% of the provided images).
 
+## 2. Training 
+
+### Problems with keras
+On my installation (and it seems others) the use of the keras method `model.fit_generator` leads to a `TypeError` that occurs when trying to pickle an object. For now I have stopped using this and replaced it with a standard `model.fit` call.
+
 ## Disclaimer
 This tool has been designed only for educational purposes to demonstrate the use of Machine Learning tools in the medical field. This tool does not replace advice or evaluation by a medical professional. Nothing on this site should be construed as an attempt to offer a medical opinion or practice medicine.

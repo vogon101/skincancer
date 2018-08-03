@@ -62,7 +62,7 @@ if __name__ == '__main__':
         nb_train_samples, nb_validation_samples, epochs, batch_size)
 
     #model.save(sys.argv[0])
-    #y_pred_proba = model.predict(X_test)
-    #y_pred = (y_pred_proba >0.5)*1
-    #print(classification_report(y_test,y_pred))
-    #plot_roc(y_test, y_pred_proba, title='ROC Curve CNN from scratch')
+    y_pred_proba = model.predict(X_test)
+    y_pred = (y_pred_proba >0.5)*1
+    print(classification_report(y_test,y_pred))
+    plot_roc(y_test, y_pred_proba, title='ROC Curve CNN from scratch')
