@@ -1,6 +1,8 @@
 # Skincancer Project
 Original code *by David Soto*  - dasoto@gmail.com
 
+Original repo can be foung [here](https://github.com/dasoto/skincancer)
+
 This is a forked version by Freddie Poser  - https://vogonjeltz.com
 
 ## 1. Data
