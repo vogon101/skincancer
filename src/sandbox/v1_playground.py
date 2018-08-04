@@ -6,12 +6,14 @@ from ml_lib.roc import plot_roc
 import tensorflow as tf
 from sklearn.metrics import classification_report
 
+import matplotlib.pyplot as plt
+
 train_data_dir = 'data_scaled/'
 validation_data_dir = 'data_scaled_validation/'
-nb_train_samples = 873
-nb_validation_samples = 96
+nb_train_samples = 1853
+nb_validation_samples = 204
 epochs = 2
-batch_size = 10
+batch_size = 100
 
 #model = mycnn.fit_generator(train_generator,validation_generator,
 #    nb_train_samples, nb_validation_samples, epochs, batch_size)
@@ -26,6 +28,8 @@ sess = tf.Session(config=tf.ConfigProto(log_device_placement=True))
 
 mycnn = CNN()
 
+areas = []
+
 for i in range(0, 100):
     mycnn.fit(
         X_train, y_train,
@@ -38,4 +42,11 @@ for i in range(0, 100):
     y_pred_proba = mycnn.predict(X_test)
     y_pred = (y_pred_proba > 0.5) * 1
     print(classification_report(y_test, y_pred))
-    plot_roc(y_test, y_pred_proba, title='ROC Curve CNN from scratch ' + str(i))
+    area = plot_roc(y_test, y_pred_proba, title='ROC Curve CNN from scratch ' + str(i))
+    print("Area_ROC = {}".format(area))
+    areas.append(area)
+
+    if (i % 9 == 0):
+        plt.plot(areas)
+        plt.ylabel("AUC")
+        plt.show()

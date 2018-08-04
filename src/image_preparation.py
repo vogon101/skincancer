@@ -7,13 +7,13 @@ import numpy as np
 def resize_images():
     print('Resizing Benign')
     moles = MoleImages('data/benign/*.jpg')
-    benigns = moles.resize_bulk()
-    moles.save_png(benigns, 'data_scaled/benign', tag='bimg-')
+    benigns = moles.resize_bulk(auto_save=True, auto_save_path='data_scaled/benign', auto_save_tag="bimg-")
+    #moles.save_png(benigns, 'data_scaled/benign', tag='bimg-')
 
     print('Resizing Malign')
     moles = MoleImages('data/malignant/*.jpg')
-    malignants = moles.resize_bulk()
-    moles.save_png(malignants,'data_scaled/malign', tag='mimg-')
+    malignants = moles.resize_bulk(auto_save=True, auto_save_path='data_scaled/malign', auto_save_tag="mimg-")
+    #moles.save_png(malignants,'data_scaled/malign', tag='mimg-')
 
 def cv_images(dir_b='data_scaled_validation/benign', dir_m='data_scaled_validation/malign', pct=0.1):
     image_b = glob.glob('data_scaled/benign/*.png')
@@ -37,5 +37,5 @@ def cv_images(dir_b='data_scaled_validation/benign', dir_m='data_scaled_validati
 
 
 if __name__ == '__main__':
-    resize_images()
+    #resize_images()
     cv_images()

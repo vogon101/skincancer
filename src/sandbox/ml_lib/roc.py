@@ -18,3 +18,5 @@ def plot_roc(y_test, y_score, title='ROC Curve'):
     plt.legend(loc="lower right")
     #plt.savefig("img/" + title + '.png')
     plt.show()
+
+    return roc_auc

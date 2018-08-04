@@ -14,7 +14,7 @@ class MoleImages():
         self.dir = dir
         self.size = None
 
-    def resize_bulk(self, size=(128,128)):
+    def resize_bulk(self, size=(128,128), auto_save =False, auto_save_path=None, auto_save_tag=None):
         '''
         Resize Images and create matrix
         Input: size of the images (128,128)
@@ -28,12 +28,27 @@ class MoleImages():
         image_list = glob.glob(self.dir)
         n_images = len(image_list)
         print('Resizing {} images:'.format(n_images))
+
+        total_resized = 0
+        offset = 0
+
         for i, imgfile in enumerate(image_list):
             print('Resizing image {} of {}'.format(i+1, n_images))
             img = io.imread(imgfile)
             img = resize(img, self.size)
             X.append(img)
-        return np.array(X)
+            total_resized += 1
+            if total_resized % 100 == 0 and auto_save:
+                print ("Saving {} images with offset {}".format(len(X), offset))
+                self.save_png(X, auto_save_path, auto_save_tag, offset=offset)
+                X = []
+                offset += 100
+
+        if auto_save:
+            print("Saving {} images with offset {}".format(len(X), offset))
+            self.save_png(X, auto_save_path, auto_save_tag, offset = offset)
+        else:
+            return np.array(X)
 
     def load_test_images(self, dir_b, dir_m):
         X = []
@@ -84,10 +99,10 @@ class MoleImages():
         with h5py.File(filename, 'r') as hf:
             return hf[dataset][:]
 
-    def save_png(self, matrix, dir, tag='img', format='png'):
+    def save_png(self, matrix, dir, tag='img', format='png', offset=0):
         for i, img in enumerate(matrix):
             if dir[-1] != '/':
-                filename = dir + '/' + tag + str(i) + '.' + format
+                filename = dir + '/' + tag + str(offset + i) + '.' + format
             else:
                 filename = dir + tag + str(i) + '.' + format
             print('Saving file {}'.format(filename))
