@@ -48,8 +48,23 @@ Once the issue in keras (described below) was avoided I managed to start getting
 
 ![ROC Curve AUC=0.85][roc_v1_95_85]
 
+My next problem was to get GPU training working on my machine. This was more of a hassle than it should have been but in the end I got it working with the following versions:
+
+* `tensorflow-gpu==1.9.0`
+* `CUDA 9.0`
+* `cudNN 7.0.5`
+* Python 3.6
+* Latest version of drivers for my card (960M)
+
+This was done in  an Anaconda3 environment. Installed using the following commands (once CUDA/cudNNN installed):
+* `conda install numpy`
+* `pip install tensorflow-gpu`
+* `pip install keras`
+
+This installation sped up training by ~8x.
+
 ### Problems with keras
-On my installation (and it seems others) the use of the keras method `model.fit_generator` leads to a `TypeError` that occurs when trying to pickle an object. For now I have stopped using this and replaced it with a standard `model.fit` call.
+On my installation (and it seems others) the use of the keras method `model.fit_generator` leads to a `TypeError` that occurs when trying to pickle an object. For now I have stopped using this and replaced it with a standard `model.fit` call. This persists when using `tensorflow-gpu 1.9.0`
 
 ## Disclaimer
 This tool has been designed only for educational purposes to demonstrate the use of Machine Learning tools in the medical field. This tool does not replace advice or evaluation by a medical professional. Nothing on this site should be construed as an attempt to offer a medical opinion or practice medicine.

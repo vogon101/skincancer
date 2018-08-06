@@ -1,8 +1,6 @@
-from keras import optimizers
 from keras.models import Sequential, load_model
 from keras.layers import Conv2D, MaxPooling2D
 from keras.layers import Activation, Dropout, Flatten, Dense
-from keras.preprocessing.image import ImageDataGenerator
 from keras import backend as K
 
 class CNN():
@@ -25,44 +23,58 @@ class CNN():
 
     def architecture(self):
         self.model = Sequential()
+
+        #Input Shape (128,128,3)
         self.model.add(Conv2D(self.nb_filters,
                             (self.kernel_size[0], self.kernel_size[1]),
                             padding='valid',
-                            input_shape=self.input_shape)) #first conv. layer (keep layer)
-        self.model.add(Activation('relu')) # Activation specification necessary for Conv2D and Dense layers
+                            input_shape=self.input_shape))
+        self.model.add(Activation('relu'))
+        #Shape: 128x128x3
+
         self.model.add(MaxPooling2D(pool_size=self.pool_size))
+        #Shape: 63x63x32
+
         #self.model.add(Dropout(0.5))
 
         self.model.add(Conv2D(self.nb_filters,
-                            (self.kernel_size[0], self.kernel_size[1]))) #2nd conv. layer (keep layer)
+                            (self.kernel_size[0], self.kernel_size[1])))
         self.model.add(Activation('relu'))
+        #Shape: 61x61x32
+
         self.model.add(MaxPooling2D(pool_size=self.pool_size))
+        #Shape: 30x30x32
 
         self.model.add(Conv2D(self.nb_filters*2,
-                            (self.kernel_size[0], self.kernel_size[1]))) #2nd conv. layer (keep layer)
+                            (self.kernel_size[0], self.kernel_size[1])))
         self.model.add(Activation('relu'))
+        #Shape: 28x28x64
+
         self.model.add(MaxPooling2D(pool_size=self.pool_size))
+        #Shape: 14x14x64
 
-
-        self.model.add(Flatten()) # necessary to flatten before going into conventional dense layer (keep layer)
+        self.model.add(Flatten())
         print('Model flattened out to ', self.model.output_shape)
+        #Shape: 12544
 
         # now start a typical neural network
-        self.model.add(Dense(64)) # (only) 32 neurons in this layer, really?  (keep layer)
+        self.model.add(Dense(64))
         self.model.add(Activation('relu'))
-        self.model.add(Dropout(0.5)) # zeros out some fraction of inputs, helps prevent overfitting
+        #Shape: 64
+
+        self.model.add(Dropout(0.5))
 
         if self.nb_classes>2:
-            self.model.add(Dense(self.nb_classes)) # 10 final nodes (one for each class) (keep layer)
+            self.model.add(Dense(self.nb_classes))
             self.model.add(Activation('softmax')) # keep softmax at end to pick between classes 0-9
             loss = 'categorical_crossentropy'
         else:
             print('Using 2 Classes')
-            self.model.add(Dense(1)) # 10 final nodes (one for each class) (keep layer)
-            self.model.add(Activation('sigmoid')) # keep softmax at end to pick between classes 0-9
+            self.model.add(Dense(1))
+            self.model.add(Activation('sigmoid'))
             loss = 'binary_crossentropy'
         self.model.compile(loss=loss,
-                      optimizer='adadelta',  #adadelta
+                      optimizer='adadelta',
                       metrics=['accuracy'])
 
     def fit(self, X_train, y_train, X_test, y_test, nb_epoch=10, batch_size=50):
@@ -80,9 +92,10 @@ class CNN():
         self.model.fit(X_train, y_train, batch_size=batch_size, epochs=nb_epoch,
                   verbose=1, validation_data=(X_test, y_test))
 
-        score = self.model.evaluate(X_test, y_test, verbose=0)
+        score = self.model.evaluate(X_test, y_test, verbose=2)
         print('Test score:', score[0])
         print('Test accuracy:', score[1]) # this is the one we care about
+        return score
 
     def fit_generator(self, train_generator, validation_generator, n_samples,
                         n_validation, nb_epoch=10, batch_size=50, callbacks=None):

@@ -41,14 +41,14 @@ class MoleImages():
         n_images_b = len(image_list_b)
         print('Loading {} images of class benign:'.format(n_images_b))
         for i, imgfile in enumerate(image_list_b):
-            print('Loading image {} of {}'.format(i+1, n_images_b))
+            #print('Loading image {} of {}'.format(i+1, n_images_b))
             img = io.imread(imgfile)
             X.append(img)
         image_list_m = glob.glob(dir_m + '/*.png')
         n_images_m = len(image_list_m)
         print('Loading {} images of class benign:'.format(n_images_m))
         for i, imgfile in enumerate(image_list_m):
-            print('Loading image {} of {}'.format(i+1, n_images_m))
+            #print('Loading image {} of {}'.format(i+1, n_images_m))
             img = io.imread(imgfile)
             X.append(img)
         y = np.hstack((np.zeros(n_images_b), np.ones(n_images_m)))
