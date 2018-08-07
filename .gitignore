@@ -11,3 +11,5 @@ data_scaled/
 data_scaled_original/
 
 *.pyc
+
+logs/*

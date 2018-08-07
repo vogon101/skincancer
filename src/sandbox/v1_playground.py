@@ -15,8 +15,6 @@ import matplotlib.pyplot as plt
 
 from keras.backend.tensorflow_backend import set_session
 
-import sys
-
 config = tf.ConfigProto()
 #config.log_device_placement=True
 #config.gpu_options.per_process_gpu_memory_fraction = 0.8

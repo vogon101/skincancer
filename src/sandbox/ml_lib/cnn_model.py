@@ -2,6 +2,7 @@ from keras.models import Sequential, load_model
 from keras.layers import Conv2D, MaxPooling2D
 from keras.layers import Activation, Dropout, Flatten, Dense
 from keras import backend as K
+from keras.callbacks import TensorBoard
 
 class CNN():
     def __init__(self, image_size=(128,128,3), nb_classes=2,
@@ -90,7 +91,9 @@ class CNN():
                                         self.img_cols, self.img_channels)
 
         self.model.fit(X_train, y_train, batch_size=batch_size, epochs=nb_epoch,
-                  verbose=1, validation_data=(X_test, y_test))
+                  verbose=1, validation_data=(X_test, y_test),
+                       #callbacks=[TensorBoard("logs/", histogram_freq=5, write_images=True)]
+                       )
 
         score = self.model.evaluate(X_test, y_test, verbose=2)
         print('Test score:', score[0])
