@@ -78,8 +78,8 @@ I also used data-augmentation (rotation and flipping) techniques as well as drop
 
 I trained this structure for 90 epochs which gave the following results:
 
-![ROC Curve for the VGG Network trained for 90 epochs](roc_v3_90e)
-![Accuracy and AUC over training](acc_auc_v3_90e)
+![ROC Curve for the VGG Network trained for 90 epochs][roc_v3_90e]
+![Accuracy and AUC over training][acc_auc_v3_90e]
 
 | class | precision | recall  | f1-score  | support |
 |:----- |:-----     | :--     |:--        |:--      |
