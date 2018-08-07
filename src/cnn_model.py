@@ -93,7 +93,7 @@ class CNN():
             verbose=1,
             validation_data=validation_generator,
             validation_steps=n_validation//batch_size,
-            use_multiprocessing=True,
+            use_multiprocessing=False,
             workers=1,
             callbacks = callbacks)
 

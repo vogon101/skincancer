@@ -29,6 +29,7 @@ def plot_roc(y_test, y_score, title='ROC Curve'):
 if __name__ == '__main__':
     train_data_dir = 'data_scaled/'
     validation_data_dir = 'data_scaled_validation/'
+    model_path = "models/da_test.h5"
     nb_train_samples = 1763
     nb_validation_samples = 194
     epochs = 100
@@ -57,9 +58,9 @@ if __name__ == '__main__':
         batch_size=batch_size,
         class_mode='binary')
 
-    best_model_VA = ModelCheckpoint('BM_VA_'+sys.argv[1],monitor='val_acc',
+    best_model_VA = ModelCheckpoint('BM_VA_'+model_path,monitor='val_acc',
                                     mode = 'max', verbose=1, save_best_only=True)
-    best_model_VL = ModelCheckpoint('BM_VL_'+sys.argv[1],monitor='val_loss',
+    best_model_VL = ModelCheckpoint('BM_VL_'+model_path,monitor='val_loss',
                                     mode = 'min', verbose=1, save_best_only=True)
 
 
@@ -67,7 +68,7 @@ if __name__ == '__main__':
         10*nb_train_samples, nb_validation_samples, epochs, batch_size,
         callbacks=[best_model_VA, best_model_VL])
 
-    model.save(sys.argv[1])
+    model.save(model_path)
     #y_pred_proba = model.predict(X_test)
     #y_pred = (y_pred_proba >0.5)*1
     #print(classification_report(y_test,y_pred))

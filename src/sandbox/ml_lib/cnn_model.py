@@ -2,7 +2,6 @@ from keras.models import Sequential, load_model
 from keras.layers import Conv2D, MaxPooling2D
 from keras.layers import Activation, Dropout, Flatten, Dense
 from keras import backend as K
-from keras.callbacks import TensorBoard
 
 class CNN():
     def __init__(self, image_size=(128,128,3), nb_classes=2,
@@ -109,7 +108,7 @@ class CNN():
             verbose=1,
             validation_data=validation_generator,
             validation_steps=n_validation//batch_size,
-            use_multiprocessing=True,
+            use_multiprocessing=False,
             workers=1,
             callbacks = callbacks)
 

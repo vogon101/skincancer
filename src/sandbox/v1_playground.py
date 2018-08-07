@@ -29,9 +29,6 @@ nb_train_samples = 1853
 nb_validation_samples = 204
 batch_size = 32
 
-#model = mycnn.fit_generator(train_generator,validation_generator,
-#    nb_train_samples, nb_validation_samples, epochs, batch_size)
-
 mimg = MoleImages()
 
 X_test, y_test = mimg.load_test_images('data_scaled_validation/benign', 'data_scaled_validation/malign')
