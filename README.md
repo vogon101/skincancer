@@ -63,6 +63,32 @@ This was done in  an Anaconda3 environment. Installed using the following comman
 
 This installation sped up training by ~8x.
 
+The code for all of this can be found in `src/sandbox/v1_playground.py`
+
+### Notebook Visualisations
+
+Included in the original project was a jupyter notebook that was used to visualise the output of a network. I updated this file to work better with multiple images.
+
+### VGG16 and Data Augmentation
+As in the original project I have attempted to use transfer learning and apply the VGG16 model (pre-trained on the ImageNet dataset) to the problem. The code can be found in the two files `src/sandbox/v2_vgg.py` and `src/sandbox/v3_vgg_DA.py` as well as the file containing the model definition `src/sandbox/ml_lib/vgg_model.py`.
+
+The structure I used was to take the VGG model (without the last three layers) and feed it into a fully connected layer with 128 neurons. This then has one output - for binary classification. i freeze the whole of the VGG16 network so that the weights don't change during training. This leaves just the final two layers that learn to interpret the result of the VGG output.
+
+I also used data-augmentation (rotation and flipping) techniques as well as dropout to prevent overfitting.
+
+I trained this structure for 90 epochs which gave the following results:
+
+![ROC Curve for the VGG Network trained for 90 epochs](roc_v3_90e)
+![Accuracy and AUC over training](acc_auc_v3_90e)
+
+| class | precision | recall  | f1-score  | support |
+|:----- |:-----     | :--     |:--        |:--      |
+| 0.0   | 0.79     | 0.96    |  0.86     |    120   |
+| 1.0   | 0.91      | 0.63    | 0.75      |   84    |
+|avg / total|0.84   | 0.82    |0.82       |204      |
+
+## 3. Other
+
 ### Problems with keras
 On my installation (and it seems others) the use of the keras method `model.fit_generator` leads to a `TypeError` that occurs when trying to pickle an object. For now I have stopped using this and replaced it with a standard `model.fit` call. This persists when using `tensorflow-gpu 1.9.0`
 
@@ -70,3 +96,5 @@ On my installation (and it seems others) the use of the keras method `model.fit_
 This tool has been designed only for educational purposes to demonstrate the use of Machine Learning tools in the medical field. This tool does not replace advice or evaluation by a medical professional. Nothing on this site should be construed as an attempt to offer a medical opinion or practice medicine.
 
 [roc_v1_95_85]:https://github.com/vogon101/skincancer/blob/master/results/Initial%20Testing/ROC%20Curve%20-%2085.png
+[roc_v3_90e]:https://github.com/vogon101/skincancer/blob/master/results/Transfer%20Learning%20with%20DA/1-roc.png
+[acc_auc_v3_90e]:https://github.com/vogon101/skincancer/blob/master/results/Transfer%20Learning%20with%20DA/1-acc-auc.png
