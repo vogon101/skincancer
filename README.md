@@ -99,9 +99,9 @@ I had the idea to try and combine the VGG16 model with a small standard CNN (3 l
 | 1.0   | 0.84      | 0.75    | 0.79      |   84    |
 |avg / total|0.84   | 0.84    |0.84       |204      |
 
-ROC Curve | Architecture
+Results | Architecture
 :---:|:----:
-![ROC for the Combined Model trained for 90 epochs][roc_combined_150e] | ![Combined model architecture][arch_combined_1]
+![ROC for the Combined Model trained for 90 epochs][roc_combined_150e]![Accuracy and AUC for the Combined Model over 90 epochs][acc_auc_combined_150e] | ![Combined model architecture][arch_combined_1]
 
 ## 3. Other
 
@@ -118,3 +118,4 @@ This tool has been designed only for educational purposes to demonstrate the use
 [acc_auc_v3_90e]:https://github.com/vogon101/skincancer/blob/master/results/Transfer%20Learning%20with%20DA/1-acc-auc.png
 [roc_combined_150e]:https://github.com/vogon101/skincancer/blob/master/results/Combined%20Model/1-150epoch-roc.png
 [arch_combined_1]:https://github.com/vogon101/skincancer/blob/master/results/Combined%20Model/1-model.png
+[acc_auc_combined_150e]:https://github.com/vogon101/skincancer/blob/master/results/Combined%20Model/1-150epoch-acc-auc.png
