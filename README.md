@@ -56,7 +56,7 @@ My next problem was to get GPU training working on my machine. This was more of 
 * Python 3.6
 * Latest version of drivers for my card (960M)
 
-This was done in  an Anaconda3 environment. Installed using the following commands (once CUDA/cudNNN installed):
+This was done in  an Anaconda3 environment. Installed using the following commands (once CUDA/cuDNN installed):
 * `conda install numpy`
 * `pip install tensorflow-gpu`
 * `pip install keras`
@@ -89,6 +89,22 @@ I trained this structure for 90 epochs which gave the following results:
 | 1.0   | 0.91      | 0.63    | 0.75      |   84    |
 |avg / total|0.84   | 0.82    |0.82       |204      |
 
+### "Combined" Model
+
+I had the idea to try and combine the VGG16 model with a small standard CNN (3 layers) to try and achieve better results. I am still experimenting with this setup but my initial test trained for 150 epochs achieved an AUC of 90 and test results as follows:
+
+| class | precision | recall  | f1-score  | support |
+|:----- |:-----     | :--     |:--        |:--      |
+| 0.0   | 0.84     | 0.90    |  0.87     |    120   |
+| 1.0   | 0.84      | 0.75    | 0.79      |   84    |
+|avg / total|0.84   | 0.84    |0.84       |204      |
+
+![ROC for the Combined Model trained for 90 epochs][roc_combined_150e]
+
+#### "Combined" Model Architecture
+
+![Combined model architecture][arch_combined_1]
+
 ## 3. Other
 
 ### Problems with keras
@@ -102,3 +118,5 @@ This tool has been designed only for educational purposes to demonstrate the use
 [roc_v1_95_85]:https://github.com/vogon101/skincancer/blob/master/results/Initial%20Testing/ROC%20Curve%20-%2085.png
 [roc_v3_90e]:https://github.com/vogon101/skincancer/blob/master/results/Transfer%20Learning%20with%20DA/1-roc.png
 [acc_auc_v3_90e]:https://github.com/vogon101/skincancer/blob/master/results/Transfer%20Learning%20with%20DA/1-acc-auc.png
+[roc_combined_150e]:https://github.com/vogon101/skincancer/blob/master/results/Combined%20Model/1-150epoch-roc.png
+[arch_combined_1]:https://github.com/vogon101/skincancer/blob/master/results/Combined%20Model/1-model.png
