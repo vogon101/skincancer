@@ -35,7 +35,7 @@ class VGGModel():
         submodel_classifier.add(Dropout(0.5))
         submodel_classifier.add(Dense(1, activation="sigmoid"))
 
-        self.model = Model(input=submodel_vgg.input, output=submodel_classifier(submodel_vgg.output))
+        self.model = Model(inputs=submodel_vgg.input, outputs=submodel_classifier(submodel_vgg.output))
 
         self.model.compile(loss='binary_crossentropy',
                       optimizer=optimizers.SGD(lr=1e-4, momentum=0.9),

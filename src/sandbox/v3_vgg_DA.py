@@ -21,7 +21,7 @@ nb_train_samples = 1853
 nb_validation_samples = 204
 batch_size = 32
 epochs_per_test = 3
-nb_total_tests = 30
+nb_total_tests = 50
 
 mimg = MoleImages()
 X_test, y_test = mimg.load_test_images('data_scaled_validation/benign', 'data_scaled_validation/malign')
@@ -51,7 +51,7 @@ validation_generator = validation_datagen.flow_from_directory(
 
 my_model = VGGModel()
 
-my_model.load_model()
+#my_model.load_model()
 
 print(my_model.model.summary())
 
