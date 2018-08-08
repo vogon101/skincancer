@@ -99,9 +99,8 @@ I had the idea to try and combine the VGG16 model with a small standard CNN (3 l
 | 1.0   | 0.84      | 0.75    | 0.79      |   84    |
 |avg / total|0.84   | 0.84    |0.84       |204      |
 
-Results | Architecture
-:---:|:----:
-![ROC for the Combined Model trained for 90 epochs][roc_combined_150e]![Accuracy and AUC for the Combined Model over 90 epochs][acc_auc_combined_150e] | ![Combined model architecture][arch_combined_1]
+
+![ROC for the Combined Model trained for 90 epochs][roc_combined_150e]
 
 ## 3. Other
 
