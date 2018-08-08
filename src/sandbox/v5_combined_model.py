@@ -27,9 +27,12 @@ mimg = MoleImages()
 X_test, y_test = mimg.load_test_images('data_scaled_validation/benign', 'data_scaled_validation/malign')
 
 train_datagen = ImageDataGenerator(
-    rotation_range=180,
+    rotation_range=360,
     vertical_flip=True,
-    horizontal_flip=True
+    horizontal_flip=True,
+    zoom_range=0.1,
+    width_shift_range=0.1,
+    height_shift_range=0.1
 )
 
 validation_datagen = ImageDataGenerator()

@@ -37,6 +37,8 @@ X_train, y_train = mimg.load_test_images('data_scaled/benign', 'data_scaled/mali
 
 mycnn = CNN()
 
+mycnn.load_model("models/model_1_test.h5")
+
 areas = []
 accuracies = []
 
