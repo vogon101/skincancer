@@ -91,16 +91,16 @@ I trained this structure for 90 epochs which gave the following results:
 
 ### "Combined" Model
 
-I had the idea to try and combine the VGG16 model with a small standard CNN (3 layers) to try and achieve better results. I am still experimenting with this setup but my initial test trained for 150 epochs achieved an AUC of 90 and test results as follows:
+I had the idea to try and combine the VGG16 model with a small standard CNN (3 layers) to try and achieve better results. I am still experimenting with this setup but my initial test trained for over 300 epochs achieved an AUC of 92 and test results as follows:
 
 | class | precision | recall  | f1-score  | support |
 |:----- |:-----     | :--     |:--        |:--      |
-| 0.0   | 0.84     | 0.90    |  0.87     |    120   |
-| 1.0   | 0.84      | 0.75    | 0.79      |   84    |
-|avg / total|0.84   | 0.84    |0.84       |204      |
+| 0.0   | 0.85     | 0.93    |  0.89     |    120   |
+| 1.0   | 0.89      | 0.76    | 0.82      |   84    |
+|avg / total|0.87   | 0.86    |0.846      |204      |
 
 
-![ROC for the Combined Model trained for 90 epochs][roc_combined_150e]
+![ROC for the Combined Model trained for 300+ epochs][roc_combined_300e]
 
 ## 3. Other
 
@@ -115,6 +115,4 @@ This tool has been designed only for educational purposes to demonstrate the use
 [roc_v1_95_85]:https://github.com/vogon101/skincancer/blob/master/results/Initial%20Testing/ROC%20Curve%20-%2085.png
 [roc_v3_90e]:https://github.com/vogon101/skincancer/blob/master/results/Transfer%20Learning%20with%20DA/1-roc.png
 [acc_auc_v3_90e]:https://github.com/vogon101/skincancer/blob/master/results/Transfer%20Learning%20with%20DA/1-acc-auc.png
-[roc_combined_150e]:https://github.com/vogon101/skincancer/blob/master/results/Combined%20Model/1-150epoch-roc.png
-[arch_combined_1]:https://github.com/vogon101/skincancer/blob/master/results/Combined%20Model/1-model.png
-[acc_auc_combined_150e]:https://github.com/vogon101/skincancer/blob/master/results/Combined%20Model/1-150epoch-acc-auc.png
+[roc_combined_300e]:https://github.com/vogon101/skincancer/blob/master/results/Combined%20Model/2-300epoch-roc.png
