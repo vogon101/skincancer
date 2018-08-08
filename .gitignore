@@ -13,3 +13,5 @@ data_scaled_original/
 *.pyc
 
 logs/*
+
+models/auto

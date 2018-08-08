@@ -1,0 +1,10 @@
+Model achieved accuracy of 0.8333333339176926
+Model saved to:  models/model_4_combined_DA.h5
+             precision    recall  f1-score   support
+
+        0.0       0.84      0.90      0.87       120
+        1.0       0.84      0.75      0.79        84
+
+avg / total       0.84      0.84      0.84       204
+
+Area_ROC = 0.9035714285714286
