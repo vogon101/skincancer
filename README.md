@@ -74,6 +74,8 @@ As in the original project I have attempted to use transfer learning and apply t
 
 The structure I used was to take the VGG model (without the last three layers) and feed it into a fully connected layer with 128 neurons. This then has one output - for binary classification. i freeze the whole of the VGG16 network so that the weights don't change during training. This leaves just the final two layers that learn to interpret the result of the VGG output.
 
+As well as learning better than the standalone CNN it also learns a lot faster, skipping out the stage I observed where the network would not train at all for up to 30 epochs before changing. This network reached ~0.73 accuracy in just three epochs.
+
 I also used data-augmentation (rotation and flipping) techniques as well as dropout to prevent overfitting.
 
 I trained this structure for 90 epochs which gave the following results:
@@ -91,6 +93,8 @@ I trained this structure for 90 epochs which gave the following results:
 
 ### Problems with keras
 On my installation (and it seems others) the use of the keras method `model.fit_generator` leads to a `TypeError` that occurs when trying to pickle an object. For now I have stopped using this and replaced it with a standard `model.fit` call. This persists when using `tensorflow-gpu 1.9.0`
+
+When trying to implement DA using the inbuilt keras tools I found that the key was to set the option `use_multiprocessing` to `False`. This allows me to use the full features of `fit_generator` without the breaking bug.
 
 ## Disclaimer
 This tool has been designed only for educational purposes to demonstrate the use of Machine Learning tools in the medical field. This tool does not replace advice or evaluation by a medical professional. Nothing on this site should be construed as an attempt to offer a medical opinion or practice medicine.
