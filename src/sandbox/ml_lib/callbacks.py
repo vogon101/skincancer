@@ -1,6 +1,8 @@
 from keras.callbacks import Callback
 import matplotlib.pyplot as plt
-from roc import classification_report, plot_roc
+from ml_lib.roc import plot_roc
+from sklearn.metrics import classification_report
+
 
 class GraphingCallback(Callback):
 
@@ -16,7 +18,7 @@ class GraphingCallback(Callback):
 
     def on_epoch_end(self, epoch, logs=None):
 
-        if (epoch % self.period == 0):
+        if epoch % self.period == 0:
             score = self.model.evaluate(self.X_test, self.y_test, verbose=2)
             self.accuracies.append(score[1])
 
