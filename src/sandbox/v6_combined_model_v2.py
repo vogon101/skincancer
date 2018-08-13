@@ -5,7 +5,7 @@ from keras.backend.tensorflow_backend import set_session
 from keras.preprocessing.image import ImageDataGenerator
 from keras.callbacks import ModelCheckpoint
 from ml_lib.callbacks import GraphingCallback
-from keras.utils.vis_utils import plot_model
+#from keras.utils.vis_utils import plot_model
 
 
 config = tf.ConfigProto(
@@ -27,7 +27,7 @@ mimg = MoleImages()
 X_test, y_test = mimg.load_test_images('data_scaled_validation/benign', 'data_scaled_validation/malign')
 
 train_datagen = ImageDataGenerator(
-    rotation_range=45,
+    rotation_range=20,
     vertical_flip=True,
     horizontal_flip=True,
     zoom_range=0.05,
@@ -51,16 +51,14 @@ validation_generator = validation_datagen.flow_from_directory(
     class_mode="binary"
 )
 
-#my_model.load_model()
-
 
 my_model = CombinedModelV2()
 
-#my_model.load_model(model_save_path)
+my_model.load_model(model_save_path)
 
 print(my_model.model.summary())
 
-plot_model(my_model.model, to_file='model.png')
+#plot_model(my_model.model, to_file='model.png')
 
 print("Starting training for {} epochs".format(nb_epochs))
 
@@ -84,6 +82,6 @@ history = my_model.fit_generator(
         callbacks
     )
 
-grapher.plot_all(nb_epochs, False)
+grapher.plot_all(nb_epochs)
 
 my_model.save_model(model_save_path)
