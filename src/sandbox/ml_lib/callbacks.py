@@ -17,22 +17,23 @@ class GraphingCallback(Callback):
         self.areas = []
 
     def on_epoch_end(self, epoch, logs=None):
+        score = self.model.evaluate(self.X_test, self.y_test, verbose=2)
+        y_pred_proba = self.model.predict(self.X_test)
+        area = plot_roc(self.y_test, y_pred_proba, title="", plot=False)
+        print("Area Under ROC = {}".format(area))
+        self.accuracies.append(score[1])
+        self.areas.append(area)
 
         if epoch % self.period == 0:
-            score = self.model.evaluate(self.X_test, self.y_test, verbose=2)
-            self.accuracies.append(score[1])
+            self.plot_all(epoch)
 
-            self.plot_all(epoch, True)
-
-    def plot_all(self, epochs, append = True):
+    def plot_all(self, epochs):
         y_pred_proba = self.model.predict(self.X_test)
         y_pred = (y_pred_proba > 0.5) * 1
         print(classification_report(self.y_test, y_pred))
         area = plot_roc(self.y_test, y_pred_proba,
                         title=self.name + ':' + str(epochs))
         print("Area Under ROC = {}".format(area))
-        if append:
-            self.areas.append(area)
 
         fig, ax1 = plt.subplots()
 

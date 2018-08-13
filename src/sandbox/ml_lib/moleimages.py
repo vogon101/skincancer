@@ -46,7 +46,7 @@ class MoleImages():
             X.append(img)
         image_list_m = glob.glob(dir_m + '/*.png')
         n_images_m = len(image_list_m)
-        print('Loading {} images of class benign:'.format(n_images_m))
+        print('Loading {} images of class malign:'.format(n_images_m))
         for i, imgfile in enumerate(image_list_m):
             #print('Loading image {} of {}'.format(i+1, n_images_m))
             img = io.imread(imgfile)
