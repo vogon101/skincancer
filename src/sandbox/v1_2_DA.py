@@ -59,13 +59,13 @@ validation_generator = validation_datagen.flow_from_directory(
 
 my_model = CNN()
 
-#my_model.load_model(model_save_path)
+my_model.load_model(model_save_path)
 
 print(my_model.model.summary())
 
-plot_model(my_model.model, to_file='model.png')
+#plot_model(my_model.model, to_file='model.png')
 
-#sys.exit(0)
+sys.exit(0)
 
 print("Starting training for {} epochs".format(nb_epochs))
 
@@ -89,6 +89,6 @@ history = my_model.fit_generator(
         callbacks
     )
 
-grapher.plot_all(nb_epochs, False)
+grapher.plot_all(nb_epochs)
 
 my_model.save_model(model_save_path)

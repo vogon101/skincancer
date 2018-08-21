@@ -18,7 +18,7 @@ class CNN(DLModel):
         self.model.add(Conv2D(filters=64, kernel_size=(3, 3), strides=(1, 1), input_shape=self.input_shape))
         self.model.add(Activation('relu'))
 
-        self.model.add(MaxPooling2D(pool_size=(2, 2)))
+        self.model.add(MaxPooling2D(pool_size=(3, 3)))
 
         # self.model.add(Dropout(0.5))
 
@@ -41,10 +41,10 @@ class CNN(DLModel):
         # Shape: 12544
 
         # now start a typical neural network
-        self.model.add(Dense(64, activation="relu"))
+        self.model.add(Dense(128, activation="relu"))
         # Shape: 64
 
-        self.model.add(Dropout(0.2))
+        self.model.add(Dropout(0.5))
 
         print('Using 2 Classes')
         self.model.add(Dense(1, activation="sigmoid"))
