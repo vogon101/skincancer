@@ -84,6 +84,6 @@ history = my_model.fit_generator(
         callbacks
     )
 
-grapher.plot_all(nb_epochs)
+grapher.plot_all(nb_epochs  )
 
 my_model.save_model(model_save_path)

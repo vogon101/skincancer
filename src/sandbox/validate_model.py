@@ -10,10 +10,6 @@ import tensorflow as tf
 
 from keras.backend import set_session
 
-import numpy as np
-
-from keras.preprocessing.image import ImageDataGenerator
-
 gpu = 0
 if (len(sys.argv) > 2):
     if sys.argv[2] == "-gpu": gpu = 1
@@ -30,14 +26,9 @@ model_path = sys.argv[1]
 model = load_model(model_path)
 
 mimg = MoleImages()
-X_test, y_test = mimg.load_test_images('data_strange_validation_scaled/benign', 'data_scaled_validation/malign')
+X_test, y_test = mimg.load_test_images('data_scaled_validation/benign', 'data_scaled_validation/malign')
 
 X_train, y_train = mimg.load_test_images('data_scaled/benign', 'data_scaled/malign')
-
-
-for i in range(0, 100):
-    print(model.predict(np.reshape(X_test[i], (1,128,128,3))))
-    print(y_test[i])
 
 print("Test Dataset")
 y_pred_proba = model.predict(X_test, verbose=1)
